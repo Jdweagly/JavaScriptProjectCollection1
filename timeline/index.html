@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            *,
+            *::before,
+            *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            }
+
+
+            a:link {
+              color: green;
+              background-color: transparent;
+              text-decoration: none;
+            }
+
+            a:visited {
+              color: pink;
+              background-color: transparent;
+              text-decoration: none;
+            }
+
+            a:hover {
+              color: rgb(255, 255, 255);
+              background-color: transparent;
+              text-decoration: underline;
+            }
+
+            a:active {
+              color: yellow;
+              background-color: transparent;
+              text-decoration: underline;
+            }
+
+            body {
+            font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+            background: #218bf5;
+            color: #fff;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+            }
+
+
+            /* INTRO SECTION
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+            .intro {
+            background: #272ebd;
+            padding: 100px 0;
+            }
+
+            .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            }
+
+            h1 {
+            font-size: 2.5rem;
+            }
+
+
+            /* TIMELINE
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+            .timeline ul {
+            background: #053872;
+            padding: 50px 0;
+            }
+
+            .timeline ul li {
+            list-style-type: none;
+            position: relative;
+            width: 6px;
+            margin: 0 auto;
+            padding-top: 50px;
+            background: #fff;
+            }
+
+            .timeline ul li::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: inherit;
+            z-index: 1;
+            }
+
+            .timeline ul li div {
+            position: relative;
+            bottom: 0;
+            width: 400px;
+            padding: 15px;
+            background: #272ebd;
+            }
+
+            .timeline ul li div::before {
+            content: "";
+            position: absolute;
+            bottom: 7px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            }
+
+            .timeline ul li:nth-child(odd) div {
+            left: 45px;
+            }
+
+            .timeline ul li:nth-child(odd) div::before {
+            left: -15px;
+            border-width: 8px 16px 8px 0;
+            border-color: transparent #272ebd transparent transparent;
+            }
+
+            .timeline ul li:nth-child(even) div {
+            left: -439px;
+            }
+
+            .timeline ul li:nth-child(even) div::before {
+            right: -15px;
+            border-width: 8px 0 8px 16px;
+            border-color: transparent transparent transparent #272ebd;
+            }
+
+            time {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            }
+
+
+            /* EFFECTS
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+            .timeline ul li::after {
+            transition: background 0.5s ease-in-out;
+            }
+
+            .timeline ul li.in-view::after {
+            background: #272ebd;
+            }
+
+            .timeline ul li div {
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            }
+
+            .timeline ul li:nth-child(odd) div {
+            transform: translate3d(200px, 0, 0);
+            }
+
+            .timeline ul li:nth-child(even) div {
+            transform: translate3d(-200px, 0, 0);
+            }
+
+            .timeline ul li.in-view div {
+            transform: none;
+            visibility: visible;
+            opacity: 1;
+            }
+
+
+            /* GENERAL MEDIA QUERIES
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+            @media screen and (max-width: 900px) {
+            .timeline ul li div {
+                width: 250px;
+            }
+            .timeline ul li:nth-child(even) div {
+                left: -289px;
+                /*250+45-6*/
+            }
+            }
+
+            @media screen and (max-width: 600px) {
+            .timeline ul li {
+                margin-left: 20px;
+            }
+            .timeline ul li div {
+                width: calc(100vw - 91px);
+            }
+            .timeline ul li:nth-child(even) div {
+                left: 45px;
+            }
+            .timeline ul li:nth-child(even) div::before {
+                left: -15px;
+                border-width: 8px 16px 8px 0;
+                border-color: transparent #272ebd transparent transparent;
+            }
+            }
+
+
+            /* EXTRA/CLIP PATH STYLES
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+            .timeline-clippy ul li::after {
+            width: 40px;
+            height: 40px;
+            border-radius: 0;
+            }
+
+            .timeline-rhombus ul li::after {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            }
+
+            .timeline-rhombus ul li div::before {
+            bottom: 12px;
+            }
+
+            .timeline-star ul li::after {
+            clip-path: polygon(
+                50% 0%,
+                61% 35%,
+                98% 35%,
+                68% 57%,
+                79% 91%,
+                50% 70%,
+                21% 91%,
+                32% 57%,
+                2% 35%,
+                39% 35%
+            );
+            }
+
+            .timeline-heptagon ul li::after {
+            clip-path: polygon(
+                50% 0%,
+                90% 20%,
+                100% 60%,
+                75% 100%,
+                25% 100%,
+                0% 60%,
+                10% 20%
+            );
+            }
+
+            .timeline-infinite ul li::after {
+            animation: scaleAnimation 2s infinite;
+            }
+
+            @keyframes scaleAnimation {
+            0% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.25);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+            }
+
+
+            /* FOOTER STYLES
+            –––––––––––––––––––––––––––––––––––––––––––––––––– */
+            .page-footer {
+            position: fixed;
+            right: 0;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            color: black;
+            background: rgba(255, 255, 255, 0.65);
+            }
+
+            .page-footer a {
+            display: flex;
+            margin-left: 4px;
+            }
+        </style>
+    </head>
+<!--
+    Timeline contents were taken from https://halofanon.fandom.com/wiki/10,248_Days_of_War:_A_Chronology_of_the_Human-Covenant_War#2525
+    Code was learned from https://mikkegoes.com/javascript-projects-for-beginners/
+    as well as https://georgemartsoukos.com/
+-->
+    <body>
+
+        <section class="intro">
+            <div class="container">
+              <h1>Halo Timeline</h1>
+              <div>
+                <a href="https://halofanon.fandom.com/wiki/10,248_Days_of_War:_A_Chronology_of_the_Human-Covenant_War">Read the full timeline on Halofanon!</a>
+              </div>
+            </div>
+          </section>
+          
+          <section class="timeline">
+            <ul>
+              <li>
+                <div>
+                  <time>2525</time> Covenant Space — High Charity: Notification of the recent findings of the Minor Transgression are successfully transmitted to the Ministry of Tranquility. Vice Minister of Tranquility Lod Mron intercepts the report and, realizing its implications, dispatches the Covenant light cruiser Rapid Conversion to the Epsilon Indi system. Notably, the Rapid Conversion is the only cruiser in the Covenant Navy commanded and crewed by Jiralhanae.
+                  Epsilon Indi system: Human and Covenant forces engage in a brief skirmish aboard the human freighter Bulk Discount, resulting in the destruction of the Covenant missionary vessel Minor Transgression. Two Covenant personnel escape the vessel's destruction, however.
+                </div>
+              </li>
+              <li>
+                <div>
+                  <time>2527</time> Covenant space: Covenant fleet Strong Condemnation departs for the human colony of Ridgeway's Folly, under the command of Fleet Master Lav 'Utaralee. The fleet comprises five warships: 1 cruiser, 1 destroyer, and 3 corvettes.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2530</time>Groombridge 1830 system: UNSC forces engage and destroy a small Covenant flotilla.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2531</time> Epsilon Indi system: The Covenant Fleet of Glorious Interdiction departs for resupply; at least two cruisers are dispatched to investigate a forerunner artifact site.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2535</time> Lambda Serpentis system: Jericho VII is evacuated as UNSC space forces withdraw; Covenant forces subsequently glass the planet.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2537</time> New Harmony: Covenant forces engage UNSC defenses and successfully land ground forces on the colony.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2545</time> Draco system - Draco III: Covenant forces assail the colony world and land troops on the surface.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2549</time> UEG Space: The LOMI Conspiracy is illegally initiated aboard the stealth cruiser UNSC Lord of Monster Island.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2550</time> Lusitania: Covenant forces approach Lusitania and are engaged by the Lusitania Defense Fleet; local and regional UNSC battle groups are informed of the attack and begin moving towards Lusitania to reinforce the inner colony's defense forces.</div>
+              </li>
+              <li>
+                <div>
+                  <time>2552</time> Ariel: Covenant heavy cruiser Pious Fury arrives near and deploys ground forces to the human colony world of Ariel. Covenant ground forces quickly overwhelm the colonial militia and capture the majority of the planet's 4,000 colonists; despite the rapidity of their advance, however, the United Nations Space Command is alerted of the attack. The UNSC launches a small counter-attack to retake the colony, deploying two frigates and a detachment of the 105th Helljumpers to Ariel.
+                  The Covenant begins excavating shortly after securing the colony.</div>
+              </li>
+            </ul>
+          </section>
+          <footer class="page-footer">
+          </footer>
+
+        <script>
+                (function () {
+                "use strict";
+
+                // define variables
+                var items = document.querySelectorAll(".timeline li");
+
+                // check if an element is in viewport
+                // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+                function isElementInViewport(el) {
+                    var rect = el.getBoundingClientRect();
+                    return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <=
+                        (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                }
+
+                function callbackFunc() {
+                    for (var i = 0; i < items.length; i++) {
+                    if (isElementInViewport(items[i])) {
+                        items[i].classList.add("in-view");
+                    }
+                    }
+                }
+
+                // listen for events
+                window.addEventListener("load", callbackFunc);
+                window.addEventListener("resize", callbackFunc);
+                window.addEventListener("scroll", callbackFunc);
+                })();
+        </script>
+    </body>
+</html>

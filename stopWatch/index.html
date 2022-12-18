@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- CSS code-->
+  
+        <style>
+        body {
+                position: absolute;
+                left: 0%;
+                text-align: center;
+            }
+  
+            /*apply css properties to container class*/
+  
+            .container {
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                height: 100%;
+                text-align: center;
+            }
+  
+            /*apply css properties to button tag*/
+  
+            button {
+                width: 90px;
+                height: 60px;
+                font-size: 30px;
+                background-color: rgb(208, 11, 188);
+                color: honeydew;
+            }
+  
+            /*apply hover effect to button tag*/
+  
+            button:hover {
+                background-color: rgb(41, 14, 172);
+                color: rgb(223, 45, 200);
+            }
+  
+            /*apply css properties to h2 tag*/
+  
+            h2 {
+                color: rgb(67, 201, 203);
+                margin: 0 50px;
+                font-size: 45px;
+            }
+            /*apply css properties to h1 tag*/
+  
+            h1 {
+                font-size: 35px;
+                color: rgb(34, 39, 179);
+                text-align: center;
+                padding-left: 10%;
+            }
+        </style>
+    </head>
+  
+    <body>
+    
+  
+        <div class="wrapper">
+            <h2>Basic JavaScript Stopwatch</h2>
+            <p><span id="seconds">00</span>:<span id="tens">00</span></p>
+            <button id="button-start">Start</button>
+            <button id="button-stop">Stop</button>
+            <button id="button-reset">Reset</button>
+            <button id="button-record">Rec</button>
+            <p id="recTimes">---</p>
+            </div> 
+        <!-- JavaScript code-->
+        <script>
+            window.onload = function () { //this html file was learned from https://mikkegoes.com/javascript-projects-for-beginners/
+                //I have made some edits to it, including allowing the user to record times into an array 
+  
+  var seconds = 00; 
+  var tens = 00; 
+  var recTimes = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+  var appendTens = document.getElementById("tens");
+  var appendSeconds = document.getElementById("seconds");
+  var appendRecTimes = document.getElementById("recTimes");
+  var buttonStart = document.getElementById('button-start');
+  var buttonStop = document.getElementById('button-stop');
+  var buttonReset = document.getElementById('button-reset');
+  var buttonRecord = document.getElementById('button-record');
+  var Interval ;
+
+  buttonStart.onclick = function() {
+    
+    clearInterval(Interval);
+     Interval = setInterval(startTimer, 10);
+  }
+  
+    buttonStop.onclick = function() {
+       clearInterval(Interval);
+  }
+  
+
+  buttonReset.onclick = function() {
+     clearInterval(Interval);
+    tens = "00";
+  	seconds = "00";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+  
+  buttonRecord.onclick = function() {
+    appendRecTimes.innerHTML = getRecTimes();
+  }
+   
+  function getRecTimes() {
+    var tempString = "";
+    for(let i = 0; i < recTimes.length; i++) {
+        if (recTimes[i] == "") {
+            recTimes[i] = "" + seconds + ":" + tens;
+            tempString = tempString + recTimes[i] + " --- ";
+            break;
+        }
+        else {
+            tempString = tempString + recTimes[i] + " --- ";
+        }
+    }
+    return tempString;
+  }
+  
+  function startTimer () {
+    tens++; 
+    
+    if(tens <= 9){
+      appendTens.innerHTML = "0" + tens;
+    }
+    
+    if (tens > 9){
+      appendTens.innerHTML = tens;
+      
+    } 
+    
+    if (tens > 99) {
+      console.log("seconds");
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+    
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+    }
+  
+  }
+  
+
+}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Tip Calculator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <style>
+        #results {
+         display:none;
+       }
+    </style>
+
+  </head>
+  <body class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card card-body text-center mt-5">
+            <h1 class="heading display-5 pb-3">Tip Calculator</h1>
+            <form id="tip-form">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="number" class="form-control" id="billTotal" placeholder="Total Bill">
+                </div>
+              </div>
+              <div class="form-group tipPersent">
+                <div class="input-group">
+                  <label for="">Tip:</label>
+
+
+                  <input type="range" class="form-control" id="tipInput" value="0">
+                  <span class="input-group-addon" id="tipOutput"></span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="">Tax:</label>
+
+
+                <input type="range" class="form-control" id="taxInput" value="0">
+                <span class="input-group-addon" id="taxOutput"></span>
+              </div>
+
+
+
+            </form>
+            <hr>
+
+            <!-- RESULTS -->
+            <div id="results" class="pt-4">
+              <h5>Results</h5>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Tip amount</span>
+                  <input type="number" class="form-control" id="tipAmount" disabled>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Total Bill with Tip</span>
+                  <input type="number" class="form-control" id="totalBillWithTip" disabled>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Payment after tax</span>
+                  <input type="number" class="form-control" id="paymentAfterTax" disabled>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        document.querySelector('#tip-form').onchange = function(){ //this code was learned from https://mikkegoes.com/javascript-projects-for-beginners/
+            //I have made some changes to it, including allowing the user to see what the business will earn after income tax 
+
+var bill = Number(document.getElementById('billTotal').value);
+var tip = document.getElementById('tipInput').value;
+var tax = document.getElementById('taxInput').value;
+document.getElementById('tipOutput').innerHTML = `${tip}%`;
+document.getElementById('taxOutput').innerHTML = `${tax}%`;
+var tipValue = bill * (tip/100)
+var finalBill = bill + tipValue
+var finalTax = finalBill - (finalBill * (tax/100))
+console.log(finalBill)
+var tipAmount = document.querySelector('#tipAmount')
+var totalBillWithTip = document.querySelector('#totalBillWithTip')
+var paymentAfterTax = document.querySelector('#paymentAfterTax')
+tipAmount.value = tipValue.toFixed(2);
+totalBillWithTip.value =finalBill.toFixed(2);
+paymentAfterTax.value = finalTax.toFixed(2);
+//Show Results
+
+document.getElementById('results').style.display='block'
+}
+    </script>
+  </body>
+</html>
